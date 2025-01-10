@@ -1,5 +1,3 @@
-import java.math.*;
-
 import static java.lang.Math.acos;
 
 public class Vector3D {
@@ -50,7 +48,20 @@ public class Vector3D {
         return new Vector3D(x * scalar, y * scalar, z * scalar);
     }
 
+    public double dotProduct(Vector3D vector) {
+        return (x * vector.getX() + y * vector.getY() + z * vector.getZ());
+    }
 
+    public double angleBetween(Vector3D vector) {
+        return Math.acos(dotProduct(vector)/(getMagnitude() * vector.getMagnitude()));
+    }
+
+    public Vector3D crossProduct(Vector3D vector) {
+        double xnew = y * vector.getZ() - z * vector.getY();
+        double ynew = z * vector.getX() - x * vector.getZ();
+        double znew = x * vector.getY() - y * vector.getX();
+        return new Vector3D(xnew, ynew, znew);
+    }
 
 
     // Override toString
@@ -58,6 +69,4 @@ public class Vector3D {
     public String toString() {
         return "(" + x + ", " + y + ", " + z + ")";
     }
-
-
 }
